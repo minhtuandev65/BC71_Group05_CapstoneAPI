@@ -15,12 +15,13 @@ function getData() {
     var img = document.getElementById("HinhSP").value;
     var description = document.getElementById("MoTaSP").value;
 
-    return {
+    let information = {
         // cach viet object cua es6 name: name => name, 
         name,             
         price,
         img,
         description, 
     }
+    return information
 
 }
