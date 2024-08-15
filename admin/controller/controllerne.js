@@ -18,6 +18,7 @@ export function getData() {
     let price = document.getElementById("GiaSP").value;
     let img = document.getElementById("HinhSP").value;
     let description = document.getElementById("MoTaSP").value;
+    let type = document.getElementById("TypeSP").value
 
     // tao object
     let information = {
@@ -26,6 +27,7 @@ export function getData() {
         price,
         img,
         description, 
+        type,
     }
     return information
 

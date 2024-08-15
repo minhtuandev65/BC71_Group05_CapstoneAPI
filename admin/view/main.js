@@ -9,7 +9,9 @@ import { onLoading, offLoading , getData } from "../controller/controllerne.js"
 
 // import validate
 
-import { validateBlank } from "../controller/validate.js"
+import { validateName } from "../controller/validate.js"
+
+
 // import onlclick in main
 window.addFood = addFood
 window.deleteFood = deleteFood
@@ -28,6 +30,7 @@ function fetchValue () {
 
     })
     .catch(function (err) {
+    console.log("🚀 ~ fetchValue ~ err: 33", err)
     console.log("loi")
     offLoading()
 
@@ -40,13 +43,14 @@ fetchValue()
 function renderFood(food)  { 
     let contentHtml = ''
     // su dung vong lap de lay cac phan tu cua food
-    for (i = 0; i < food.length; i++  ) {
+    for (let i = 0; i < food.length; i++  ) {
         let string = ` <tr>
         <td>${food[i].id}</td>
         <td>${food[i].name}</td>
         <td>${food[i].price}</td>
         <td><img width=100 src="${food[i].img}"/></td>
         <td>${food[i].description}</td>
+        <td>${food[i].type}</td>
         <td class="d-flex">
         <button onclick="deleteFood('${food[i].id}')" class="btn btn-primary">Xóa</button>
         <button onclick="editFood('${food[i].id}')" class="btn btn-warning mx-2">Sửa</button>
@@ -66,6 +70,7 @@ function addFood () {
     let cuisine = getData()
     // lay API ben foodService de dua data len he thong
     createService(cuisine)
+    validateName()
     .then(function (res) {
         console.log(res )
         // dong modal 
@@ -76,7 +81,7 @@ function addFood () {
       .catch(function (err) {
         // neu loi thi se in ra loi va se tat black screen
         offLoading();
-        console.log("🚀 ~ err:", err);
+        console.log("🚀 ~ err 82:", err);
       });
 }
 // xoa
@@ -107,6 +112,8 @@ function editFood(id) {
    document.getElementById("GiaSP").value = food.price
    document.getElementById("HinhSP").value = food.img
    document.getElementById("MoTaSP").value = food.description
+   document.getElementById("TypeSP").value = food.type
+
    // gan id vao modal title 
    document.getElementById("product-id").innerText = food.id
     document.getElementById("product-id").style.display = "none"
