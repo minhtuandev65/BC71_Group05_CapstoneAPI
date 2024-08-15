@@ -1,6 +1,6 @@
 var urlApi = 'https://66a7890f53c13f22a3d01a64.mockapi.io/food'
 
-function getListValue ()  {
+export function getListValue ()  {
  return  axios({
     url: urlApi,
     // method get dung de lay tat ca data tu mockapi xuong cu the o day la food' data
@@ -9,7 +9,7 @@ function getListValue ()  {
  })
 }
 
-function createService(food) {
+export function createService(food) {
     return axios ({
       url:  urlApi,
       // method get dung de dua data len mockapi
@@ -20,7 +20,7 @@ function createService(food) {
 
 
 
-function deleteService(id) {
+export function deleteService(id) {
     return axios ({
         // truyen urlApi tu mockApi va id tu food-store de tim ra vi tri can xoa 
         url: `${urlApi}/${id}`,
@@ -33,7 +33,7 @@ function deleteService(id) {
 
 
 // sua san pham theo id
-function getDetailService(id) {
+export function getDetailService(id) {
     return axios ({
         url: `${urlApi}/${id}`,
         method: 'GET'
@@ -43,7 +43,7 @@ function getDetailService(id) {
 
 // cap nhat san pham theo id 
 
-function updateDetailService(food, id) {
+export function updateDetailService(food, id) {
     return axios ({
         url: `${urlApi}/${id}`,
     // cap nhat mockapi bang cach su sung method PUT

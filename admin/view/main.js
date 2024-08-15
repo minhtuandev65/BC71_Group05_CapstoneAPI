@@ -1,14 +1,34 @@
+// import foodServices
+
+console.log("xinchao")
+import { getDetailService, getListValue, deleteService, createService, updateDetailService, } from "../services/foodServices.js"
+
+// import controller 
+
+import { onLoading, offLoading , getData } from "../controller/controllerne.js"
+
+// import validate
+
+import { validateBlank } from "../controller/validate.js"
+// import onlclick in main
+window.addFood = addFood
+window.deleteFood = deleteFood
+window.updateFood = updateFood
+window.editFood = editFood 
+
+
 function fetchValue () {
     onLoading()
     getListValue()
     .then(function (res) {
+        console.log("🚀 ~ res:", res)
         // res.data la data cua mockApi
-        renderFood(res.data)
+    renderFood(res.data)
     offLoading()
 
     })
-    .catch( function (err) {
-        console.log("loi")
+    .catch(function (err) {
+    console.log("loi")
     offLoading()
 
     })
@@ -25,7 +45,7 @@ function renderFood(food)  {
         <td>${food[i].id}</td>
         <td>${food[i].name}</td>
         <td>${food[i].price}</td>
-        <td><img width=100 src="${food[i].img}"/> </td>
+        <td><img width=100 src="${food[i].img}"/></td>
         <td>${food[i].description}</td>
         <td class="d-flex">
         <button onclick="deleteFood('${food[i].id}')" class="btn btn-primary">Xóa</button>
@@ -36,16 +56,18 @@ function renderFood(food)  {
     }
     // show ra man hinh
     document.getElementById("tblDanhSachSP").innerHTML = contentHtml;
+    console.log("🚀 ~ renderFood ~ contentHtml:", contentHtml)
 
 }
 
-
-function addFood() {
+// them
+function addFood () {
     // dat bien cuisine de lay data tu function getData ben controller.js
     let cuisine = getData()
     // lay API ben foodService de dua data len he thong
     createService(cuisine)
     .then(function (res) {
+        console.log(res )
         // dong modal 
         $("#myModal").modal("hide");
         // goi lai de cap nhat len he thong va render data
@@ -57,7 +79,8 @@ function addFood() {
         console.log("🚀 ~ err:", err);
       });
 }
-// dang function cua es6
+// xoa
+
 
 function deleteFood(id) {  
     onLoading()
@@ -72,7 +95,7 @@ function deleteFood(id) {
     })
 }
 
-
+// sua
 function editFood(id) {
     getDetailService(id)
     .then(function (res) {
@@ -95,7 +118,7 @@ function editFood(id) {
      
 }
 
-
+// cap nhat
 function updateFood() {
     // lay id tu product-id de dinh vi duoc vi tri
     let takeId = document.getElementById("product-id").innerText

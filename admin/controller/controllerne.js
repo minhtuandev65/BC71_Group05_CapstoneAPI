@@ -1,18 +1,18 @@
-function onLoading() {
+export function onLoading() {
 
     // hien thi black screen
     document.getElementById("spinner").style.display = "block"
 }
 
 
-function offLoading() {
+export function offLoading() {
     // tat hien thi black screen
     document.getElementById("spinner").style.display = "none"
 }
 
 
 
-function getData() {
+export function getData() {
     //lay thong tin tu modal
     let name = document.getElementById("TenSP").value;
     let price = document.getElementById("GiaSP").value;
