@@ -1,7 +1,6 @@
 // import foodServices
 
-console.log("xinchao")
-import { getDetailService, getListValue, deleteService, createService, updateDetailService, } from "../services/foodServices.js"
+import { getDetailService, getListValue, deleteService, createService, updateDetailService} from "../services/foodServices.js"
 
 // import controller 
 
@@ -9,7 +8,7 @@ import { onLoading, offLoading , getData } from "../controller/controllerne.js"
 
 // import validate
 
-import { validateName } from "../controller/validate.js"
+import { validateName, validatePrice  , validateDes , validateImg, validateType, validateSameName } from "../controller/validate.js"
 
 
 // import onlclick in main
@@ -58,31 +57,50 @@ function renderFood(food)  {
         </tr>`
         contentHtml += string
     }
-    // show ra man hinh
+    // show ra man hinh'
     document.getElementById("tblDanhSachSP").innerHTML = contentHtml;
-    console.log("🚀 ~ renderFood ~ contentHtml:", contentHtml)
 
 }
 
 // them
 function addFood () {
+
     // dat bien cuisine de lay data tu function getData ben controller.js
     let cuisine = getData()
-    // lay API ben foodService de dua data len he thong
-    createService(cuisine)
-    validateName()
-    .then(function (res) {
-        console.log(res )
-        // dong modal 
-        $("#myModal").modal("hide");
-        // goi lai de cap nhat len he thong va render data
-        fetchValue();
-      })
-      .catch(function (err) {
-        // neu loi thi se in ra loi va se tat black screen
-        offLoading();
-        console.log("🚀 ~ err 82:", err);
-      });
+    // validation
+  
+    let checkFail = false
+
+    // dat ten bien 
+    let ValSameName = validateSameName()
+    let valName = validateName()      
+    let valPrice = validatePrice()
+    let valDes = validateDes()
+    let valImg = validateImg()
+    let valType = validateType()
+
+    let checkALLTrueToShow = ValSameName  && valName &&  valPrice && valDes && valImg && valType
+
+    if ( checkALLTrueToShow !== checkFail) {
+          // lay API ben foodService de dua data len he thong
+        createService(cuisine)
+        .then(function (res) {
+            console.log(res )
+            // dong modal 
+            $("#myModal").modal("hide");
+            // goi lai de cap nhat len he thong va render data
+            fetchValue();
+          })
+          .catch(function (err) {
+            // neu loi thi se in ra loi va se tat black screen
+            offLoading();
+            console.log("🚀 ~ err 82:", err);
+          });
+    } 
+
+
+  
+
 }
 // xoa
 

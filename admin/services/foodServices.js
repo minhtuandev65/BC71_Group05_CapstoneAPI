@@ -51,3 +51,4 @@ export async function updateDetailService(food, id) {
         data: food
     })
 }
+
