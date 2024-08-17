@@ -72,7 +72,6 @@ function themMoi() {
 // them
 function addFood() {
     // Lấydanh sách sản phẩm hiện tại từ API
-    document.getElementById("TenSP").setAttribute("readonly", false);
    
 
     getListValue()
@@ -143,15 +142,7 @@ function deleteFood(id) {
 // sua
 function editFood(id) {
     document.getElementById("updatene").style.display = "block"
-    // $("#myModal").clickOutsideThisElement(function() {
-    //     fetchValue()
-    //     document.getElementById("TenSP").value = ''
-    //     document.getElementById("GiaSP").value = ''
-    //     document.getElementById("HinhSP").value = ''
-    //     document.getElementById("MoTaSP").value = ''
-    //     document.getElementById("TypeSP").value = ''
-    //     document.getElementById("TenSP").setAttribute("readonly", false);
-    // });
+
     
 
     getDetailService(id)
@@ -184,6 +175,10 @@ document.getElementById("btnThemSP").addEventListener('click', () => {
             document.getElementById("MoTaSP").value = ''
             document.getElementById("TypeSP").value = ''
             document.getElementById("TenSP").removeAttribute("readonly");
+    document.getElementById("updatene").style.display = "none"
+
+
+
 })
 // cap nhat
 function updateFood() {
