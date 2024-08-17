@@ -53,23 +53,29 @@
         <!--Danh sách sản phẩm -->
         <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 d-flex ">
               <!-- BEGIN BUTTOM THÊM MỚI -->
               <button
                 id="btnThemSP"
-                class="btn btn-success"
+                class="btn btn-success mr-3"
                 data-toggle="modal"
                 data-target="#myModal"
               >
                 <i class="fa fa-plus mr-1"></i>
                 Thêm Mới
               </button>
+              <select class="form-select-lg  p-2 rounded" name="sort" id="sort" aria-label="Default select example">
+                <option  selected value="">Sắp xếp giá tiền</option>
+                <option id="lower" value="1">từ lớn đến bé</option>
+                <option id="higher" value="2">từ bé đến lớn</option>
+              </select>
               <!-- END BUTTON THÊM MỚI -->
             </div>
             <div class="col-md-4">
               <!-- BEGIN TÌM KIẾM -->
               <div class="input-group mb-3">
                 <input
+                id="findFoodName"
                   type="text"
                   class="form-control"
                   placeholder="Nhập từ khóa"
@@ -88,7 +94,7 @@
           <div class="clear-fix"></div>
           <div class="tblSanPham" id="tblSanPham">
             <!-- BEGIN TABLE SẢN PHẨM -->
-            <table class="table table-bordered">
+            <table class="table table-bordered mt-3">
               <thead>
                 <th>STT</th>
                 <th>Tên Sản Phẩm</th>
@@ -166,10 +172,10 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button onclick="addFood()" class="btn btn-success">
+              <button id="addNe" onclick="addFood()" class="btn btn-success">
                 Thêm
               </button>
-              <button onclick="updateFood()" class="btn btn-success">
+              <button id="updatene" onclick="updateFood()" class="btn btn-success" style="display: none;">
                 Cập nhật
               </button>
             </div>
