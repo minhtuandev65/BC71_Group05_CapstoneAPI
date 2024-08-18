@@ -33,24 +33,7 @@ export let validateName = () => {
 
 
 
-function trung() {
-    return getListValue()
-        .then(function (res) {
-            let value = res.data
-            let ValCheckName = validateSameName(value)
-            console.log("🚀 ~ ValCheckName:", ValCheckName())
 
-
-            return ValCheckName()
-        })
-
-
-        .catch(function (err) {
-            // thất bại
-            console.log(err);
-        });
-
-}
 
 
 // validate trung 

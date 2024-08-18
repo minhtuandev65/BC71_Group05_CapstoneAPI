@@ -62,9 +62,18 @@ function renderFood(food) {
 
 }
 
+
+
+
+function themMoi() {
+
+}
+
 // them
 function addFood() {
-    // Lấy danh sách sản phẩm hiện tại từ API
+    // Lấydanh sách sản phẩm hiện tại từ API
+   
+
     getListValue()
         .then(function (res) {
             let productList = res.data;
@@ -95,6 +104,11 @@ function addFood() {
                         $("#myModal").modal("hide");
                         // Cập nhật danh sách sản phẩm
                         fetchValue();
+                        document.getElementById("TenSP").value = ''
+                        document.getElementById("GiaSP").value = ''
+                        document.getElementById("HinhSP").value = ''
+                        document.getElementById("MoTaSP").value = ''
+                        document.getElementById("TypeSP").value = ''
                     })
                     .catch(function (err) {
                         // Nếu lỗi, hiển thị lỗi và tắt loading screen
@@ -109,6 +123,7 @@ function addFood() {
 }
 
 // xoa
+
 
 
 function deleteFood(id) {
@@ -126,6 +141,10 @@ function deleteFood(id) {
 
 // sua
 function editFood(id) {
+    document.getElementById("updatene").style.display = "block"
+
+    
+
     getDetailService(id)
         .then(function (res) {
             // dat food = res.data de lay data cua mockApi
@@ -133,6 +152,7 @@ function editFood(id) {
             $("#myModal").modal("show");
             // dua data len
             document.getElementById("TenSP").value = food.name
+            document.getElementById("TenSP").setAttribute("readonly", true);
             document.getElementById("GiaSP").value = food.price
             document.getElementById("HinhSP").value = food.img
             document.getElementById("MoTaSP").value = food.description
@@ -148,9 +168,22 @@ function editFood(id) {
 
 
 }
+document.getElementById("btnThemSP").addEventListener('click', () => {
+    document.getElementById("TenSP").value = ''
+            document.getElementById("GiaSP").value = ''
+            document.getElementById("HinhSP").value = ''
+            document.getElementById("MoTaSP").value = ''
+            document.getElementById("TypeSP").value = ''
+            document.getElementById("TenSP").removeAttribute("readonly");
+    document.getElementById("updatene").style.display = "none"
 
+
+
+})
 // cap nhat
 function updateFood() {
+
+    
     // lay id tu product-id de dinh vi duoc vi tri
     let takeId = document.getElementById("product-id").innerText
     // lay data tu information 
@@ -160,10 +193,88 @@ function updateFood() {
 
             $("#myModal").modal("hide");
             fetchValue()
+            document.getElementById("TenSP").value = ''
+            document.getElementById("GiaSP").value = ''
+            document.getElementById("HinhSP").value = ''
+            document.getElementById("MoTaSP").value = ''
+            document.getElementById("TypeSP").value = ''
+            document.getElementById("TenSP").setAttribute("readonly", false);
+
 
         })
         .catch(function (err) {
             console.log(err)
 
-        })
+        })           
 }
+
+
+// tim san pham 
+
+document.getElementById("findFoodName").addEventListener('change', () => {
+    // Get the selected value
+    const searchValue = document.getElementById("findFoodName").value;
+
+    getListValue()
+        .then(function (res) {
+            let foodName = [];
+            const value = res.data; // Assuming res.data is an array of food items
+
+            console.log("🚀 ~ value:", value);
+
+            // Iterate over the array and find matching food item
+            for (let i = 0; i < value.length; i++) {
+                const foodItem = value[i]; // Assuming each item has a 'type' property
+
+                if (foodItem.type === searchValue) {
+                    foodName.push(foodItem);
+                    console.log("🚀 ~ foodName:", foodName)
+                    console.log("🚀 ~ foodItem:", foodItem);
+                    
+                }
+            }
+            renderFood(foodName); // Call renderFood with the found foodName
+
+            
+     
+        })
+        .catch(function (err) {
+            // Handle errors
+            console.error(err);
+        });
+});
+
+
+// sort san pham 
+
+
+
+document.getElementById("sort").addEventListener('change', () => {
+    let sortNe = document.getElementById("sort").value 
+    
+    console.log(sortNe)
+
+    getListValue()
+        .then(function (res) {
+            const value = res.data; // Assuming res.data is an array of food items
+            if (sortNe == 1) {
+                value.sort((a, b) => b.price - a.price);
+                console.log("🚀 ~ value:", value)
+                renderFood(value); // Call renderFood with the found foodName
+            }
+            
+            else if (sortNe == 2) {
+                value.sort((a, b) => a.price - b.price);
+                console.log("🚀 ~ value2:", value)
+                renderFood(value); // Call renderFood with the found foodName
+            }
+
+            
+     
+        })
+        .catch(function (err) {
+            // Handle errors
+            console.error(err);
+        });
+});
+ 

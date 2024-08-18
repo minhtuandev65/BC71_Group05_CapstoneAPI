@@ -16,7 +16,7 @@ export const renderFoodList = (foodList) => {
 
         productDiv.innerHTML = `
             <div class="product-image">
-                <img src="${product.img}" width="200" alt="${product.name}">
+                <img src="${product.img}" width="100" alt="${product.name}">
             </div>
             <div class="product-details">
                 <h3 class="product-name">Name: ${product.name}</h3>

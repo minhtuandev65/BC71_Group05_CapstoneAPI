@@ -23,10 +23,10 @@ export function getData() {
     // tao object
     let information = {
         // cach viet object cua es6 name: name => name, 
-        name,             
+        name,
         price,
         img,
-        description, 
+        description,
         type,
     }
     return information

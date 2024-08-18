@@ -7,6 +7,8 @@ import '../controller/openCart.js'
 import '../controller/selectTypeController.js'
 import { initializePage } from '../controller/changeType.js';
 
+
 initializePage();
+
 
 
